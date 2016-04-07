@@ -6,7 +6,10 @@ import os
 def draw_graph(graph):
     # extract nodes from graph
     nodes = set([n1 for n1, n2, n3 in graph] + [n2 for n1, n2, n3 in graph])
+    print("nodes: ", end='')
     print(len(nodes))
+    print("edges: ", end='')
+    print(len(graph))
 
     # create networkx graph
     G=nx.Graph()
@@ -37,21 +40,21 @@ def draw_graph(graph):
     #nx.draw(G, with_labels=False)
     #nx.draw_networkx_labels(G, pos, labels, font_size=1)
 
-    nx.draw_networkx_nodes(G, pos, nodelist=d.keys(), node_size=[v*0.05 for v in d.values()], node_color='red')
-    nx.draw_networkx_edges(G, pos, edgelist=elarge, width = 0.1, edge_color='b')
-    nx.draw_networkx_edges(G, pos, edgelist=esmall, width = 0.01, alpha=0.5, edge_color='b', style='dashed')
-    nx.draw_networkx_labels(G, pos, labels, font_size=5, font_color='g')
-
-
 
     #nx.draw(G, pos)
-
+    #nx.draw_networkx_nodes(G, pos, nodelist=d.keys(), node_size=[v*0.05 for v in d.values()], node_color='red')
+    nx.draw_networkx_nodes(G, pos, node_size=0.1, node_color='b', alpha=0.5)
+    nx.draw_networkx_nodes(G, pos, labels, node_size=5, node_color='r')
+    nx.draw_networkx_edges(G, pos, edgelist=elarge, width = 0.1, edge_color='b')
+    nx.draw_networkx_edges(G, pos, edgelist=esmall, width = 0.03, alpha=0.5, edge_color='b')
+    nx.draw_networkx_labels(G, pos, labels, font_size=5, font_color='brown')
     #nx.draw_random(G)
 
-    plt.axis('off')
-    #plt.show()
+
     # show graph
-    plt.savefig("./name.png", dpi=1000, format="png")
+    #plt.show()
+    plt.axis('off')
+    plt.savefig("./name.png", dpi=800, format="png")
     #plt.savefig("./name.png")
     print("done")
 
