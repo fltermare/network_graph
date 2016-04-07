@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import sys
 import os
 
-def draw_graph(graph):
+def draw_graph(graph, degree):
     # extract nodes from graph
     nodes = set([n1 for n1, n2, n3 in graph] + [n2 for n1, n2, n3 in graph])
     print("nodes: ", end='')
@@ -35,7 +35,7 @@ def draw_graph(graph):
 
     labels = {}
     for node in G.nodes():
-        if G.degree(node) > 50:
+        if G.degree(node) > degree:
             labels[node] = node
     #nx.draw(G, with_labels=False)
     #nx.draw_networkx_labels(G, pos, labels, font_size=1)
@@ -73,7 +73,8 @@ def getdata(infile):
 
 def main():
     infile = sys.argv[1]
-    g = getdata(infile)
+    degree = int(sys.argv[2])
+    g = getdata(infile, degree)
     #for i in g:
     #    print(i)
     # draw example
