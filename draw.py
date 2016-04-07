@@ -74,12 +74,12 @@ def getdata(infile):
 def main():
     infile = sys.argv[1]
     degree = int(sys.argv[2])
-    g = getdata(infile, degree)
+    g = getdata(infile)
     #for i in g:
     #    print(i)
     # draw example
     #graph = [(20, 21),(21, 22),(22, 23), (23, 24),(24, 25), (25, 20)]
-    draw_graph(g)
+    draw_graph(g, degree)
 
 if __name__ == "__main__":
     main()
