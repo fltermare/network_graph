@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import sys
 import os
 
-def draw_graph(graph, degree):
+def draw_graph(graph, degree, pic):
     # extract nodes from graph
     nodes = set([n1 for n1, n2, n3 in graph] + [n2 for n1, n2, n3 in graph])
     print("nodes: ", end='')
@@ -54,17 +54,17 @@ def draw_graph(graph, degree):
     # show graph
     #plt.show()
     plt.axis('off')
-    plt.savefig("./name.png", dpi=800, format="png")
+    plt.savefig(pic, dpi=800, format="png")
     #plt.savefig("./name.png")
     print("done")
 
 
-def getdata(infile):
+def getdata(infile, t):
     print(infile)
     graph = []
     with open(infile, 'r') as f:
         for line in f:
-            if 'flag' in line:
+            if t in line:
                 items = line.strip().split(',')
                 graph.append((items[1], items[2], items[8]))
     #print(graph)
@@ -74,12 +74,16 @@ def getdata(infile):
 def main():
     infile = sys.argv[1]
     degree = int(sys.argv[2])
-    g = getdata(infile)
-    #for i in g:
-    #    print(i)
-    # draw example
-    #graph = [(20, 21),(21, 22),(22, 23), (23, 24),(24, 25), (25, 20)]
-    draw_graph(g, degree)
+    if 'time' in sys.argv[3]:
+        g = getdata(infile, 'time')
+    elif 'flag' in sys.argv[3]:
+        g = getdata(infile, 'flag')
+    else:
+        print("ERRRROR")
+        exit()
+    pic = sys.argv[4]
+    #g = getdata(infile)
+    draw_graph(g, degree, pic)
 
 if __name__ == "__main__":
     main()
